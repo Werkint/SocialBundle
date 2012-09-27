@@ -1,5 +1,5 @@
 <?php
-namespace Social\Vkontakte;
+namespace Social;
 
 require_once('vendor/facebook/facebook.php');
 
