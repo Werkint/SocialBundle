@@ -1,0 +1,20 @@
+{
+	"name":       "nick4fake/social",
+	"type":       "library",
+	"description":"Social module",
+	"license":    "own",
+	"authors":    [
+		{
+			"name": "Bogdan Yurov",
+			"email":"bogdan@yurov.me"
+		}
+	],
+	"require":    {
+		"php":">=5.3"
+	},
+	"autoload":   {
+		"psr-0":{
+			"Social":"lib/"
+		}
+	}
+}
