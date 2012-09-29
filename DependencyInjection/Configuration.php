@@ -1,9 +1,8 @@
 <?php
-namespace Werkint\Bundle\WebappBundle\DependencyInjection;
+namespace Werkint\Bundle\SocialBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\NodeBuilder;
 
 class Configuration implements ConfigurationInterface {
 
@@ -20,7 +19,7 @@ class Configuration implements ConfigurationInterface {
 		$rootNode
 			->scalarNode('xdpath')->end();
 		$rootNode
-			->arrayNode('social')
+			->arrayNode('socials')
 			->isRequired()
 			->requiresAtLeastOneElement()
 			->useAttributeAsKey('name')
