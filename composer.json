@@ -1,5 +1,5 @@
 {
-	"name":       "nick4fake/social",
+	"name":       "werkint/bundle-social",
 	"type":       "library",
 	"description":"Social module",
 	"license":    "own",
@@ -12,9 +12,10 @@
 	"require":    {
 		"php":">=5.3"
 	},
+	"target-dir": "Werkint/Bundle/SocialBundle",
 	"autoload":   {
 		"psr-0":{
-			"Social":"lib/"
+			"Werkint\\Bundle\\SocialBundle":""
 		}
 	}
 }
