@@ -1,0 +1,6 @@
+services:
+    werkint.social:
+        class: Werkint\Bundle\SocialBundle\Social\Service
+        arguments:
+            - @werkint.webapp
+            - %werkint_social%
