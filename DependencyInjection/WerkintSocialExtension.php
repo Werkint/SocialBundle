@@ -1,5 +1,5 @@
 <?php
-namespace Werkint\Bundle\WebappBundle\DependencyInjection;
+namespace Werkint\Bundle\SocialBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 
-class WerkintWebappExtension extends Extension {
+class WerkintSocialExtension extends Extension {
 	public function load(array $configs, ContainerBuilder $container) {
 		$processor = new Processor();
 		$config = $processor->processConfiguration(new Configuration($this->getAlias()), $configs);
