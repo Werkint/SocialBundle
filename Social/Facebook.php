@@ -5,17 +5,24 @@ require_once('vendor/facebook/facebook.php');
 
 class Facebook extends \Facebook {
 
-	public static $param_appId;
-	public static $param_secret;
+	protected $parameters;
 
-	public function __construct() {
-		if (!(static::$param_appId && static::$param_secret)) {
-			throw new \Exception('App data is not set');
-		}
+	public function __construct(
+		array $parameters
+	) {
+		$this->parameters = $parameters;
 		parent::__construct(array(
-			'appId'  => static::$param_appId,
-			'secret' => static::$param_secret,
+			'appId'  => $this->parameters['socials']['facebook']['id'],
+			'secret' => $this->parameters['socials']['facebook']['secret'],
 		));
+	}
+
+	public function postFeedMessage($uid, $data) {
+		return $this->api('/' . $uid . '/feed', 'post', $data);
+	}
+
+	public function getUserInfo() {
+		return $this->api('/' . $this->getUser());
 	}
 
 }

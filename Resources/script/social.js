@@ -238,7 +238,7 @@ app.social = new (function () {
 					root.style.display = 'none';
 					document.body.appendChild(root);
 					FB.init({
-						appId:     CONST.fb_app_id, // App ID
+						appId:     CONST.werkint_social_idfb, // App ID
 						channelUrl:CONST.werkint_social_xdpath + type, // Channel File
 						status:    true, // check login status
 						cookie:    true, // enable cookies to allow the server to access the session
@@ -255,8 +255,8 @@ app.social = new (function () {
 						stack_trigger(response);
 					});
 					VK.init({
-						apiId:            CONST.vk_app_id,
-						nameTransportPath:'//' + CONST.webapp_res + '/misc/xd_receiver.php?social=' + type
+						apiId:            CONST.werkint_social_idvk,
+						nameTransportPath:CONST.werkint_social_xdpath + type
 					});
 				};
 				break;

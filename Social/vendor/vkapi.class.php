@@ -14,7 +14,7 @@ class vkapi {
 	var $app_id;
 	var $api_url;
 
-	function vkapi($app_id, $api_secret, $api_url = 'api.vk.com/api.php') {
+	function __construct($app_id, $api_secret, $api_url = 'api.vk.com/api.php') {
 		$this->app_id = $app_id;
 		$this->api_secret = $api_secret;
 		if (!strstr($api_url, 'http://')) $api_url = 'http://' . $api_url;
