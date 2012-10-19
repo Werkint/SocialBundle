@@ -117,7 +117,7 @@ app.social = new (function () {
 						if (response.data) {
 							var friends = response.data;
 							var list = {};
-							for (i = 0; i < friends.length; i++) {
+							for (var i = 0; i < friends.length; i++) {
 								list[friends[i]['id']] = {
 									'name': friends[i]['name'],
 									'title':friends[i]['name'],
@@ -135,7 +135,7 @@ app.social = new (function () {
 						if (data.response) {
 							var friends = data.response.friends;
 							var list = {};
-							for (i = 0; i < friends.length; i++) {
+							for (var i = 0; i < friends.length; i++) {
 								var name = friends[i]['first_name'] + ' ' + friends[i]['last_name'];
 								list[friends[i]['uid']] = {
 									'name': name,
