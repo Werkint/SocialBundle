@@ -29,6 +29,16 @@ app.social = new (function () {
 			}
 		});
 
+		this.bind = function (callback) {
+			if (!(window[type.toUpperCase()] && that.initialized)) {
+				setTimeout(function () {
+					that.bind(callback);
+				}, 100);
+				return;
+			}
+			callback();
+		};
+
 		this.login = (function (callback) {
 			// TODO: а если логин отменен?
 			if (!(window[type.toUpperCase()] && that.initialized)) {
@@ -77,18 +87,17 @@ app.social = new (function () {
 			}
 		});
 
-		this.likeButton = (function (id, data) {
+		this.likeButton = function (id, data) {
 			if (!$('#' + id).size()) {
 				return;
 			}
-			if (!this.logined) {
-				this.login(function () {
-					this.likeButton(id, data);
-				});
-				return;
+			if(!data) {
+				data = {type: "button"};
 			}
-			VK.Widgets.Like(id, data);
-		});
+			this.bind(function () {
+				VK.Widgets.Like(id, data);
+			});
+		};
 
 		this.getprofile = (function (callback) {
 			if (!this.logined) {
