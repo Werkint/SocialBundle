@@ -4,7 +4,7 @@ app.social = new (function () {
 			'jsurl':'vk.com/js/api/openapi.js'
 		},
 		'fb':{
-			'jsurl':   'connect.facebook.net/en_US/all.js',
+			'jsurl':   'connect.facebook.net/ru_RU/all.js',
 			'localapi':'user/profile/postfbwall'
 		}
 	}
