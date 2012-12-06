@@ -15,8 +15,8 @@ class Vkontakte extends \vkapi {
 	) {
 		$this->parameters = $parameters;
 		parent::__construct(
-			$this->parameters['socials']['vkontakte']['id'],
-			$this->parameters['socials']['vkontakte']['secret']
+			$this->parameters['vkontakte']['appid'],
+			$this->parameters['vkontakte']['secret']
 		);
 	}
 

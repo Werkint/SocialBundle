@@ -19,15 +19,14 @@ class Configuration implements ConfigurationInterface {
 		$rootNode
 			->scalarNode('xdpath')->end();
 		$rootNode
-			->arrayNode('socials')
-			->isRequired()
-			->requiresAtLeastOneElement()
-			->useAttributeAsKey('name')
-			->prototype('array')->children()
-			->scalarNode('name')->end()
-			->scalarNode('id')->isRequired()->end()
+			->arrayNode('facebook')->children()
+			->scalarNode('appid')->end()
 			->scalarNode('secret')->isRequired()->end()
-			->end()->end()
+			->end();
+		$rootNode
+			->arrayNode('vkontakte')->children()
+			->scalarNode('appid')->end()
+			->scalarNode('secret')->isRequired()->end()
 			->end();
 
 		$rootNode->end();

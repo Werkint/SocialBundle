@@ -12,8 +12,8 @@ class Facebook extends \Facebook {
 	) {
 		$this->parameters = $parameters;
 		parent::__construct(array(
-			'appId'  => $this->parameters['socials']['facebook']['id'],
-			'secret' => $this->parameters['socials']['facebook']['secret'],
+			'appId'  => $this->parameters['facebook']['appid'],
+			'secret' => $this->parameters['facebook']['secret'],
 		));
 	}
 
