@@ -21,72 +21,79 @@ require_once('base_facebook.php');
  * Extends the BaseFacebook class with the intent of using
  * PHP sessions to store user ids and access tokens.
  */
-class Facebook extends BaseFacebook {
-	/**
-	 * Identical to the parent constructor, except that
-	 * we start a PHP session to store the user ID and
-	 * access token if during the course of execution
-	 * we discover them.
-	 *
-	 * @param Array $config the application configuration.
-	 * @see BaseFacebook::__construct in facebook.php
-	 */
-	public function __construct($config) {
-		if (!session_id()) {
-			session_start();
-		}
-		parent::__construct($config);
-	}
+class Facebook extends BaseFacebook
+{
+    /**
+     * Identical to the parent constructor, except that
+     * we start a PHP session to store the user ID and
+     * access token if during the course of execution
+     * we discover them.
+     *
+     * @param Array $config the application configuration.
+     * @see BaseFacebook::__construct in facebook.php
+     */
+    public function __construct($config)
+    {
+        if (!session_id()) {
+            session_start();
+        }
+        parent::__construct($config);
+    }
 
-	protected static $kSupportedKeys =
-		array('state', 'code', 'access_token', 'user_id');
+    protected static $kSupportedKeys =
+        array('state', 'code', 'access_token', 'user_id');
 
-	/**
-	 * Provides the implementations of the inherited abstract
-	 * methods.  The implementation uses PHP sessions to maintain
-	 * a store for authorization codes, user ids, CSRF states, and
-	 * access tokens.
-	 */
-	protected function setPersistentData($key, $value) {
-		if (!in_array($key, static::$kSupportedKeys)) {
-			static::errorLog('Unsupported key passed to setPersistentData.');
-			return;
-		}
+    /**
+     * Provides the implementations of the inherited abstract
+     * methods.  The implementation uses PHP sessions to maintain
+     * a store for authorization codes, user ids, CSRF states, and
+     * access tokens.
+     */
+    protected function setPersistentData($key, $value)
+    {
+        if (!in_array($key, static::$kSupportedKeys)) {
+            static::errorLog('Unsupported key passed to setPersistentData.');
+            return;
+        }
 
-		$session_var_name = $this->constructSessionVariableName($key);
-		$_SESSION[$session_var_name] = $value;
-	}
+        $session_var_name = $this->constructSessionVariableName($key);
+        $_SESSION[$session_var_name] = $value;
+    }
 
-	protected function getPersistentData($key, $default = false) {
-		if (!in_array($key, static::$kSupportedKeys)) {
-			static::errorLog('Unsupported key passed to getPersistentData.');
-			return $default;
-		}
+    protected function getPersistentData($key, $default = false)
+    {
+        if (!in_array($key, static::$kSupportedKeys)) {
+            static::errorLog('Unsupported key passed to getPersistentData.');
+            return $default;
+        }
 
-		$session_var_name = $this->constructSessionVariableName($key);
-		return isset($_SESSION[$session_var_name]) ?
-			$_SESSION[$session_var_name] : $default;
-	}
+        $session_var_name = $this->constructSessionVariableName($key);
+        return isset($_SESSION[$session_var_name]) ?
+            $_SESSION[$session_var_name] : $default;
+    }
 
-	protected function clearPersistentData($key) {
-		if (!in_array($key, static::$kSupportedKeys)) {
-			static::errorLog('Unsupported key passed to clearPersistentData.');
-			return;
-		}
+    protected function clearPersistentData($key)
+    {
+        if (!in_array($key, static::$kSupportedKeys)) {
+            static::errorLog('Unsupported key passed to clearPersistentData.');
+            return;
+        }
 
-		$session_var_name = $this->constructSessionVariableName($key);
-		unset($_SESSION[$session_var_name]);
-	}
+        $session_var_name = $this->constructSessionVariableName($key);
+        unset($_SESSION[$session_var_name]);
+    }
 
-	protected function clearAllPersistentData() {
-		foreach (static::$kSupportedKeys as $key) {
-			$this->clearPersistentData($key);
-		}
-	}
+    protected function clearAllPersistentData()
+    {
+        foreach (static::$kSupportedKeys as $key) {
+            $this->clearPersistentData($key);
+        }
+    }
 
-	protected function constructSessionVariableName($key) {
-		return implode('_', array('fb',
-			$this->getAppId(),
-			$key));
-	}
+    protected function constructSessionVariableName($key)
+    {
+        return implode('_', array('fb',
+            $this->getAppId(),
+            $key));
+    }
 }

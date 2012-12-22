@@ -1,21 +1,21 @@
 {
-	"name":       "werkint/bundle-social",
-	"type":       "library",
-	"description":"Social module",
-	"license":    "own",
-	"authors":    [
-		{
-			"name": "Bogdan Yurov",
-			"email":"bogdan@yurov.me"
-		}
-	],
-	"require":    {
-		"php":">=5.3"
-	},
-	"target-dir": "Werkint/Bundle/SocialBundle",
-	"autoload":   {
-		"psr-0":{
-			"Werkint\\Bundle\\SocialBundle":""
-		}
-	}
+    "name":        "werkint/social-bundle",
+    "type":        "library",
+    "description": "Social module",
+    "license":     "GPL",
+    "authors":     [
+        {
+            "name":  "Bogdan Yurov",
+            "email": "bogdan@yurov.me"
+        }
+    ],
+    "require":     {
+        "php": ">=5.3"
+    },
+    "target-dir":  "Werkint/Bundle/SocialBundle",
+    "autoload":    {
+        "psr-0": {
+            "Werkint\\Bundle\\SocialBundle": ""
+        }
+    }
 }
