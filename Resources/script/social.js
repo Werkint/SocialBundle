@@ -58,7 +58,7 @@ app.social = new (function () {
 					}, {scope:'email,publish_stream'});
 					break;
 				case 'vk':
-					VK.Auth.login(null, VK.access.FRIENDS);
+					VK.Auth.login(null, VK.access.FRIENDS, VK.access.OFF);
 					break;
 			}
 		});
