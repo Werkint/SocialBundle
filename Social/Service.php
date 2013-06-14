@@ -1,5 +1,6 @@
 <?php
 namespace Werkint\Bundle\SocialBundle\Social;
+
 use Werkint\Bundle\WebappBundle\Webapp\Webapp;
 
 class Service
