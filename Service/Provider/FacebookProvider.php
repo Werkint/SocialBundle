@@ -1,9 +1,7 @@
 <?php
 namespace Werkint\Bundle\SocialBundle\Social;
 
-require_once('vendor/facebook/facebook.php');
-
-class Facebook extends \Facebook
+class FacebookProvider extends \Facebook
 {
 
     protected $parameters;

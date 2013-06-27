@@ -1,14 +1,14 @@
 services:
     werkint.social:
-        class: Werkint\Bundle\SocialBundle\Social\Service
+        class: Werkint\Bundle\SocialBundle\Service\Social
         arguments:
             - @werkint.webapp
             - %werkint_social%
-    werkint.social.facebook:
-        class: Werkint\Bundle\SocialBundle\Social\Facebook
+    werkint.social.provider.facebookprovider:
+        class: Werkint\Bundle\SocialBundle\Service\Provider\FacebookProvider
         arguments:
             - %werkint_social%
-    werkint.social.vkontakte:
-        class: Werkint\Bundle\SocialBundle\Social\Vkontakte
+    werkint.social.provider.vkontakteprovider:
+        class: Werkint\Bundle\SocialBundle\Service\Provider\VkontakteProvider
         arguments:
             - %werkint_social%

@@ -1,9 +1,9 @@
 <?php
 namespace Werkint\Bundle\SocialBundle\Social;
 
-require_once('vendor/vkapi.class.php');
+use Vkapi\Vkapi;
 
-class Vkontakte extends \vkapi
+class VkontakteProvider extends Vkapi
 {
 
     public static $param_appId;
@@ -23,7 +23,10 @@ class Vkontakte extends \vkapi
 
     public function getProfile($uid)
     {
-        $resp = $this->api('getProfiles', array('uids' => $uid, 'fields' => 'uid, first_name, last_name, nickname'));
+        $resp = $this->api(
+            'getProfiles',
+            ['uids' => $uid, 'fields' => 'uid, first_name, last_name, nickname']
+        );
         $resp = $resp['response'];
         return count($resp) && $resp ? $resp[0] : null;
     }
