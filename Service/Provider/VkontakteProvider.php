@@ -1,5 +1,5 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Social;
+namespace Werkint\Bundle\SocialBundle\Service\Provider;
 
 use Vkapi\Vkapi;
 

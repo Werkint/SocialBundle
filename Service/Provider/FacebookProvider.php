@@ -1,5 +1,5 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Social;
+namespace Werkint\Bundle\SocialBundle\Service\Provider;
 
 class FacebookProvider extends \Facebook
 {
