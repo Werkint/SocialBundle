@@ -4,11 +4,11 @@ services:
         arguments:
             - @werkint.webapp
             - %werkint_social%
-    werkint.social.provider.facebookprovider:
+    werkint.social.provider.facebook:
         class: Werkint\Bundle\SocialBundle\Service\Provider\FacebookProvider
         arguments:
             - %werkint_social%
-    werkint.social.provider.vkontakteprovider:
+    werkint.social.provider.vkontakte:
         class: Werkint\Bundle\SocialBundle\Service\Provider\VkontakteProvider
         arguments:
             - %werkint_social%
