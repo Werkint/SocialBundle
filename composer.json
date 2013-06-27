@@ -10,7 +10,9 @@
         }
     ],
     "require":     {
-        "php": ">=5.3"
+        "facebook/php-sdk": "*",
+        "werkint/vkapi":    "*",
+        "php":              ">=5.3"
     },
     "target-dir":  "Werkint/Bundle/SocialBundle",
     "autoload":    {
