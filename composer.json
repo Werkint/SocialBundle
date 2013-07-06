@@ -1,7 +1,7 @@
 {
     "name":        "werkint/social-bundle",
     "type":        "library",
-    "description": "Social module",
+    "description": "Bundle for OAuth2 login and registration",
     "license":     "GPL",
     "authors":     [
         {
@@ -10,9 +10,12 @@
         }
     ],
     "require":     {
-        "facebook/php-sdk": "*",
-        "werkint/vkapi":    "*",
-        "php":              ">=5.4"
+        "bitgandtter/google-api": "*",
+        "facebook/php-sdk":       "*",
+        "werkint/vkapi":          "*",
+        "werkint/webapp-bundle":  "*",
+
+        "php": ">=5.4"
     },
     "target-dir":  "Werkint/Bundle/SocialBundle",
     "autoload":    {

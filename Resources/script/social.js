@@ -1,4 +1,4 @@
-app.social = new (function () {
+app.fn.social = new (function () {
     var factoryData = {
         'vk': {
             'jsurl': 'vk.com/js/api/openapi.js'
@@ -7,9 +7,9 @@ app.social = new (function () {
             'jsurl':    'connect.facebook.net/ru_RU/all.js',
             'localapi': 'user/profile/postfbwall'
         }
-    }
+    };
 
-    var factory = (function (type) {
+    var SocialSystem = (function (type) {
         var that = this;
 
         this.logined = false;
@@ -272,7 +272,7 @@ app.social = new (function () {
         }
 
         // Load the SDK Asynchronously
-        (function (d) {
+        void function (d) {
             var js, id = 'jssdk-social-' + type, ref = d.getElementsByTagName('script')[0];
             if (d.getElementById(id)) {
                 return;
@@ -282,13 +282,13 @@ app.social = new (function () {
             js.async = true;
             js.src = '//' + factoryData[type].jsurl;
             ref.parentNode.insertBefore(js, ref);
-        }(document));
+        }(document);
     });
 
     var list = {};
 
-    list.vk = list.vkontakte = new factory('vk');
-    list.fb = list.facebook = new factory('fb');
+    list.vk = list.vkontakte = new SocialSystem('vk');
+    list.fb = list.facebook = new SocialSystem('fb');
 
     this.get = (function (type) {
         return list[type];
