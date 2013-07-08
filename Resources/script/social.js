@@ -1,4 +1,4 @@
-app.fn.social = new (function () {
+app.social = new (function () {
     var factoryData = {
         'vk': {
             'jsurl': 'vk.com/js/api/openapi.js'

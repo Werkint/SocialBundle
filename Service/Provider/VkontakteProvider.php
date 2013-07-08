@@ -1,39 +1,77 @@
 <?php
 namespace Werkint\Bundle\SocialBundle\Service\Provider;
 
-use Vkapi\Vkapi;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Werkint\Bundle\SocialBundle\Service\Bridge\VkontakteBridge;
 
-class VkontakteProvider extends Vkapi
+/**
+ * VkontakteProvider.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
+class VkontakteProvider implements
+    AuthenticationProviderInterface
 {
-
-    public static $param_appId;
-    public static $param_secret;
-
-    protected $parameters;
+    protected $bridge;
+    protected $provider;
+    protected $appid;
+    protected $property;
 
     public function __construct(
-        array $parameters
+        VkontakteBridge $bridge,
+        UserProviderInterface $provider,
+        $appid,
+        $property
     ) {
-        $this->parameters = $parameters;
-        parent::__construct(
-            $this->parameters['vkontakte']['appid'],
-            $this->parameters['vkontakte']['secret']
-        );
+        $this->bridge = $bridge;
+        $this->provider = $provider;
+        $this->appid = $appid;
+        $this->property = $property;
     }
 
-    public function getProfile($uid)
+    public function supportsClass($class)
     {
-        $resp = $this->api(
-            'getProfiles',
-            ['uids' => $uid, 'fields' => 'uid, first_name, last_name, nickname']
-        );
-        $resp = $resp['response'];
-        return count($resp) && $resp ? $resp[0] : null;
+        return $this->provider->supportsClass($class);
     }
 
-    public function getUserInfo($uid)
+    public function findByVkontakte($userid)
     {
-        return $this->getProfile($uid);
+        $provider = $this->provider;
+        /** @var EntityRepository $provider */
+        return $provider->findOneBy([
+            $this->property => $userid,
+        ]);
     }
 
+    public function loadUserByUsername($userid)
+    {
+        $user = $this->findByVkontakte($userid);
+        $data = $this->bridge->getProfile($userid);
+
+        if (empty($data)) {
+            $user = null;
+        }
+
+        if (empty($user)) {
+            throw new UsernameNotFoundException('The user is not authenticated on VKontakte');
+        }
+
+        return $user;
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        $property = $this->property;
+        $property = 'get' . strtoupper($property[0]) . substr($property, 1);
+        if (!$this->supportsClass(get_class($user)) || !$user->$property()) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+        }
+
+        return $this->loadUserByUsername($user->$property());
+    }
 }
