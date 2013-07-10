@@ -1,20 +1,25 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Service;
+namespace Werkint\Bundle\SocialBundle\Service\Authentication;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
+/**
+ * SocialToken.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
 class SocialToken extends AbstractToken
 {
-    protected $social;
+    protected $providerKey;
     protected $hash;
     protected $data;
 
     public function __construct(
-        array $roles, $social, $hash, array $data
+        array $roles, $providerKey, $hash = null, array $data = []
     ) {
         parent::__construct($roles);
 
-        $this->social = $social;
+        $this->providerKey = $providerKey;
         $this->hash = $hash;
         $this->data = $data;
     }
@@ -22,7 +27,7 @@ class SocialToken extends AbstractToken
     public function serialize()
     {
         return serialize([
-            $this->social,
+            $this->providerKey,
             $this->hash,
             $this->data,
             parent::serialize()
@@ -31,13 +36,18 @@ class SocialToken extends AbstractToken
 
     public function unserialize($serialized)
     {
-        list($this->social, $this->hash, $this->add, $parent) = unserialize($serialized);
+        list($this->providerKey, $this->hash, $this->add, $parent) = unserialize($serialized);
         parent::unserialize($parent);
     }
 
     public function getCredentials()
     {
         return null;
+    }
+
+    public function getProviderKey()
+    {
+        return $this->providerKey;
     }
 
 }

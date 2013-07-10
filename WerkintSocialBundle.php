@@ -4,7 +4,7 @@ namespace Werkint\Bundle\SocialBundle;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Werkint\Bundle\SocialBundle\DependencyInjection\Factory\VkontakteFactory;
+use Werkint\Bundle\SocialBundle\DependencyInjection\Security\Factory\SocialsFactory;
 
 /**
  * WerkintSocialBundle.
@@ -19,6 +19,6 @@ class WerkintSocialBundle extends Bundle
 
         $extension = $container->getExtension('security');
         /** @var SecurityExtension $extension */
-        $extension->addSecurityListenerFactory(new VkontakteFactory());
+        $extension->addSecurityListenerFactory(new SocialsFactory());
     }
 }

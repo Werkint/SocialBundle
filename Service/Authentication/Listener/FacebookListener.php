@@ -1,15 +1,23 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Service\AuthListener;
+namespace Werkint\Bundle\SocialBundle\Service\Authentication\Listener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
-use Werkint\Bundle\SocialBundle\Service\SocialToken;
 
-class Vkontakte extends AbstractAuthenticationListener
+/**
+ * FacebookListener.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
+class FacebookListener extends AbstractAuthenticationListener
 {
-    protected $social;
+    protected function attemptAuthentication(Request $request)
+    {
+        echo 'test';
+    }
+    /*protected $social;
 
     public function setSocial(array $social)
     {
@@ -18,6 +26,7 @@ class Vkontakte extends AbstractAuthenticationListener
 
     protected function checkRequest(Request $request)
     {
+        die('test');
         $check = $request->get('uid') && $request->get('hash');
         $check = $check && $request->cookies->get('vk_app_' . $this->social['vk']['id']);
         return $check;
@@ -59,6 +68,6 @@ class Vkontakte extends AbstractAuthenticationListener
         }
 
         return null;
-    }
+    }*/
 
 }
