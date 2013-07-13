@@ -4,6 +4,11 @@ namespace Werkint\Bundle\SocialBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Configuration.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
 class Configuration implements ConfigurationInterface
 {
 
@@ -24,12 +29,14 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->arrayNode('facebook')->children()
             ->scalarNode('appid')->end()
-            ->scalarNode('secret')->isRequired()->end()
+            ->scalarNode('secret')->end()
+            ->arrayNode('scope')->prototype('scalar')->end()
             ->end();
         $rootNode
             ->arrayNode('vkontakte')->children()
             ->scalarNode('appid')->end()
-            ->scalarNode('secret')->isRequired()->end()
+            ->scalarNode('secret')->end()
+            ->arrayNode('scope')->prototype('scalar')->end()
             ->end();
 
         $rootNode->end();

@@ -3,6 +3,11 @@ namespace Werkint\Bundle\SocialBundle\Service;
 
 use Werkint\Bundle\WebappBundle\Webapp\Webapp;
 
+/**
+ * Social.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
 class Social
 {
 

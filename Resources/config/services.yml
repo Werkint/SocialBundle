@@ -4,11 +4,33 @@ services:
         arguments:
             - @werkint.webapp
             - %werkint_social%
-    werkint.social.provider.facebook:
-        class: Werkint\Bundle\SocialBundle\Service\Provider\FacebookProvider
+
+    # Bridges
+    werkint.social.bridge.facebook:
+        class: Werkint\Bundle\SocialBundle\Service\Bridge\FacebookBridge
         arguments:
             - %werkint_social%
-    werkint.social.provider.vkontakte:
-        class: Werkint\Bundle\SocialBundle\Service\Provider\VkontakteProvider
+    werkint.social.bridge.vkontakte:
+        class: Werkint\Bundle\SocialBundle\Service\Bridge\VkontakteBridge
         arguments:
             - %werkint_social%
+
+    # Auth providers
+    werkint.social.authentication.provider.vkontakte:
+        class: Werkint\Bundle\SocialBundle\Service\Authentication\Provider\VkontakteProvider
+        arguments:
+            - @werkint.social.bridge.vkontakte
+    werkint.social.authentication.provider.facebook:
+        class: Werkint\Bundle\SocialBundle\Service\Authentication\Provider\FacebookProvider
+        arguments:
+            - @werkint.social.bridge.facebook
+
+    # Auth listener
+    werkint.social.authentication.listener.vkontakte:
+        class:    Werkint\Bundle\SocialBundle\Service\Authentication\Listener\VkontakteListener
+        parent:   security.authentication.listener.abstract
+        abstract: true
+    werkint.social.authentication.listener.facebook:
+        class:    Werkint\Bundle\SocialBundle\Service\Authentication\Listener\FacebookListener
+        parent:   security.authentication.listener.abstract
+        abstract: true

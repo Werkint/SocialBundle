@@ -1,14 +1,15 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Service\Provider;
+namespace Werkint\Bundle\SocialBundle\Service\Bridge;
 
 use Vkapi\Vkapi;
 
-class VkontakteProvider extends Vkapi
+/**
+ * VkontakteBridge.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
+class VkontakteBridge extends Vkapi
 {
-
-    public static $param_appId;
-    public static $param_secret;
-
     protected $parameters;
 
     public function __construct(
@@ -34,6 +35,18 @@ class VkontakteProvider extends Vkapi
     public function getUserInfo($uid)
     {
         return $this->getProfile($uid);
+    }
+
+    public function getLoginUrl()
+    {
+        $params = [
+            'client_id'     => $this->app_id,
+            'scope'         => $this->parameters['vkontakte']['scope'],
+            'redirect_uri'  => $this->parameters['checkpath'],
+            'response_type' => 'code',
+            'display'       => 'page',
+        ];
+        return 'https://oauth.vk.com/authorize?' . http_build_query($params);
     }
 
 }

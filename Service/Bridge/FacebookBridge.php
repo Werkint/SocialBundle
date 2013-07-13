@@ -1,9 +1,13 @@
 <?php
-namespace Werkint\Bundle\SocialBundle\Service\Provider;
+namespace Werkint\Bundle\SocialBundle\Service\Bridge;
 
-class FacebookProvider extends \Facebook
+/**
+ * FacebookBridge.
+ *
+ * @author Bogdan Yurov <bogdan@yurov.me>
+ */
+class FacebookBridge extends \Facebook
 {
-
     protected $parameters;
 
     public function __construct(
@@ -24,6 +28,15 @@ class FacebookProvider extends \Facebook
     public function getUserInfo()
     {
         return $this->api('/' . $this->getUser());
+    }
+
+    public function getLoginUrl()
+    {
+        return parent::getLoginUrl([
+            'scope'        => $this->parameters['facebook']['scope'],
+            'redirect_uri' => $this->parameters['checkpath'],
+            'display'      => 'page',
+        ]);
     }
 
 }
