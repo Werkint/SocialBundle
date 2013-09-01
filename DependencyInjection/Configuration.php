@@ -25,7 +25,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root($this->alias)->children();
 
         $rootNode
-            ->scalarNode('xdpath')->end();
+            ->scalarNode('xdpath')->end()
+            ->scalarNode('checkpath')->end();
         $rootNode
             ->arrayNode('facebook')->children()
             ->scalarNode('appid')->end()
